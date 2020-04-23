@@ -75,4 +75,35 @@ class NoteRepository
 
         return (bool) $q->rowCount() ? true : false;
     }
+
+    /**
+     * Select note row.
+     *
+     * @param int $noteId The note Id
+     *
+     * @return NoteData The note object
+     */
+    public function getNote(int $noteId): NoteData
+    {
+        $row = [
+            'id' => $noteId,
+        ];
+
+        $sql = "SELECT * FROM notes
+                WHERE id=:id";
+
+        $q = $this->connection->prepare($sql);
+        $q->execute($row);
+        $data = $q->fetch();
+
+        $note = new NoteData();
+        $note->id = $data['id'];
+        $note->title = $data['title'];
+        $note->text = $data['text'];
+        $note->userId = $data['user_id'];
+        $note->created = $data['created'];
+        $note->updated = $data['updated'];
+
+        return $note;
+    }
 }

@@ -62,7 +62,7 @@ final class NoteService
     public function deleteNote(int $noteId): bool
     {
         // Validation
-        if (empty(noteId)) {
+        if (empty($noteId)) {
             throw new InvalidArgumentException('Wrong note Id');
         }
 
@@ -70,5 +70,27 @@ final class NoteService
         $status = $this->repository->deleteNote($noteId);
 
         return $status;
+    }
+
+    /**
+     * Get a note.
+     *
+     * @param int $note The note Id
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return NoteData The note object
+     */
+    public function getNote(int $noteId): NoteData
+    {
+        // Validation
+        if (empty(noteId)) {
+            throw new InvalidArgumentException('Wrong note Id');
+        }
+
+        // Get note
+        $note = $this->repository->getNote($noteId);
+
+        return $note;
     }
 }

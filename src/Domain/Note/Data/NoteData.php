@@ -4,6 +4,9 @@ namespace App\Domain\Note\Data;
 
 final class NoteData
 {
+    /** @var int */
+    public $id;
+
     /** @var string */
     public $title;
 

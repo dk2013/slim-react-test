@@ -2,7 +2,6 @@
 
 namespace App\Action;
 
-use App\Domain\Note\Data\NoteData;
 use App\Domain\Note\Service\NoteService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,10 +18,7 @@ final class NoteDeleteAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, Array $args)
     {
         // Collect input from the URL args
-        $noteId = $args['id'];
-
-        $note = new NoteData();
-
+        $noteId = intval($args['id']);
 
         // Invoke the Domain with inputs and retain the result
         $status = $this->noteService->deleteNote($noteId);

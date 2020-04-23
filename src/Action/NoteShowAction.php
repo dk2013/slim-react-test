@@ -7,7 +7,7 @@ use App\Domain\Note\Service\NoteService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class NoteCreateAction
+final class NoteShowAction
 {
     private $noteService;
 
@@ -16,31 +16,29 @@ final class NoteCreateAction
         $this->noteService = $noteService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, Array $args)
     {
         $userId = 1; // hardcoded because of test task
 
-        // Collect input from the HTTP request
-        $data = (array)$request->getParsedBody();
-
-        $note = new NoteData();
-        $note->title = $data['title'];
-        $note->text = $data['text'];
-        $note->userId = $userId;
-        $note->created = date('Y-m-d H:i:s');
-        $note->updated = date('Y-m-d H:i:s');
+        // Collect input from the URL args
+        $noteId = intval($args['id']);
 
         // Invoke the Domain with inputs and retain the result
-        $noteId = $this->noteService->createNote($note);
+        $note = $this->noteService->getNote($noteId);
 
         // Transform the result into the JSON representation
         $result = [
-            'id' => $noteId
+            'id' => $note->id,
+            'title' => $note->title,
+            'text' => $note->text,
+            'user_id' => $note->userId,
+            'created' => $note->created,
+            'updated' => $note->updated
         ];
 
         // Build the HTTP response
         $response->getBody()->write((string)json_encode($result));
 
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }
 }
