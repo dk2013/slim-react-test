@@ -20,7 +20,7 @@ final class NoteDeleteAction
         // Collect input from the URL args
         $noteId = intval($args['id']);
 
-        // Invoke the Domain with inputs and retain the result
+        // Delete note by Id
         $status = $this->noteService->deleteNote($noteId);
 
         // Transform the result into the JSON representation

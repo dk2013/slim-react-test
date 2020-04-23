@@ -34,7 +34,7 @@ class NoteRepository
      */
     public function insertNote(NoteData $note): int
     {
-        $row = [
+        $params = [
             'title' => $note->title,
             'text' => $note->text,
             'user_id' => $note->userId,
@@ -49,7 +49,7 @@ class NoteRepository
                 created=:created,
                 updated=:updated";
 
-        $this->connection->prepare($sql)->execute($row);
+        $this->connection->prepare($sql)->execute($params);
 
         return (int) $this->connection->lastInsertId();
     }
@@ -63,17 +63,17 @@ class NoteRepository
      */
     public function deleteNote(int $noteId): bool
     {
-        $row = [
+        $params = [
             'id' => $noteId,
         ];
 
         $sql = "DELETE FROM notes
                 WHERE id=:id";
 
-        $q = $this->connection->prepare($sql);
-        $q->execute($row);
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($params);
 
-        return (bool) $q->rowCount() ? true : false;
+        return (bool) $stmt->rowCount() ? true : false;
     }
 
     /**
@@ -85,16 +85,16 @@ class NoteRepository
      */
     public function getNote(int $noteId): NoteData
     {
-        $row = [
+        $params = [
             'id' => $noteId,
         ];
 
         $sql = "SELECT * FROM notes
                 WHERE id=:id";
 
-        $q = $this->connection->prepare($sql);
-        $q->execute($row);
-        $data = $q->fetch();
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($params);
+        $data = $stmt->fetch();
 
         $note = new NoteData();
         $note->id = $data['id'];
@@ -105,5 +105,41 @@ class NoteRepository
         $note->updated = $data['updated'];
 
         return $note;
+    }
+
+    /**
+     * Select all notes by user Id.
+     *
+     * @param int $noteId The note Id
+     *
+     * @return Array The array of note objects
+     */
+    public function getNoteList(int $userId): Array
+    {
+        $params = [
+            'user_id' => $userId,
+        ];
+
+        $sql = "SELECT * FROM notes
+                WHERE user_id=:user_id
+                ORDER BY created ASC";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($params);
+        $data = $stmt->fetchAll();
+
+        $noteList = [];
+        foreach($data as $row) {
+            $note = new NoteData();
+            $note->id = $row['id'];
+            $note->title = $row['title'];
+            $note->text = $row['text'];
+            $note->userId = $row['user_id'];
+            $note->created = $row['created'];
+            $note->updated = $row['updated'];
+            $noteList[] = $note;
+        }
+
+        return $noteList;
     }
 }

@@ -84,7 +84,7 @@ final class NoteService
     public function getNote(int $noteId): NoteData
     {
         // Validation
-        if (empty(noteId)) {
+        if (empty($noteId)) {
             throw new InvalidArgumentException('Wrong note Id');
         }
 
@@ -92,5 +92,27 @@ final class NoteService
         $note = $this->repository->getNote($noteId);
 
         return $note;
+    }
+
+    /**
+     * Get a note list for user.
+     *
+     * @param int $userId The user Id
+     * 
+     * @throws InvalidArgumentException
+     *
+     * @return Array The array of note objects
+     */
+    public function getNoteList(int $userId): Array
+    {
+        // Validation
+        if (empty($userId)) {
+            throw new InvalidArgumentException('Wrong user Id');
+        }
+
+        // Get array of note objects
+        $noteList = $this->repository->getNoteList($userId);
+
+        return $noteList;
     }
 }

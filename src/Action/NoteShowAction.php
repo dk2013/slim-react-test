@@ -23,7 +23,7 @@ final class NoteShowAction
         // Collect input from the URL args
         $noteId = intval($args['id']);
 
-        // Invoke the Domain with inputs and retain the result
+        // Get note by Id
         $note = $this->noteService->getNote($noteId);
 
         // Transform the result into the JSON representation
