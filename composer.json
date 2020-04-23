@@ -1,9 +1,9 @@
 {
     "require": {
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.0",
         "php-di/php-di": "^6.1",
-        "selective/config": "^0.2.0"
+        "selective/config": "^0.2.0",
+        "slim/psr7": "^1.0",
+        "slim/slim": "^4.5"
     },
     "autoload": {
         "psr-4": {
