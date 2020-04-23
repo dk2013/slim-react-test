@@ -38,9 +38,9 @@ final class NoteService
     public function createNote(NoteData $note): int
     {
         // Validation
-        // if (empty($user->username)) {
-        //     throw new InvalidArgumentException('Username required');
-        // }
+        if (empty($note->title) || empty($note->text)) {
+            throw new InvalidArgumentException('Fields required');
+        }
 
         // Insert note
         $noteId = $this->repository->insertNote($note);
@@ -48,5 +48,27 @@ final class NoteService
         // Note created successfully
 
         return $noteId;
+    }
+
+    /**
+     * Delete a note.
+     *
+     * @param int $note The note Id
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return bool Status of operation
+     */
+    public function deleteNote(int $noteId): bool
+    {
+        // Validation
+        if (empty(noteId)) {
+            throw new InvalidArgumentException('Wrong note Id');
+        }
+
+        // Delete note
+        $status = $this->repository->deleteNote($noteId);
+
+        return $status;
     }
 }

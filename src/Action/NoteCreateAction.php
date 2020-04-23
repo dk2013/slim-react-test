@@ -18,7 +18,7 @@ final class NoteCreateAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $userId = 1; // hardcoded because of test tesk
+        $userId = 1; // hardcoded because of test task
 
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();

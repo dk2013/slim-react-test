@@ -51,6 +51,28 @@ class NoteRepository
 
         $this->connection->prepare($sql)->execute($row);
 
-        return (int)$this->connection->lastInsertId();
+        return (int) $this->connection->lastInsertId();
+    }
+
+    /**
+     * Delete note row.
+     *
+     * @param int $noteId The note Id
+     *
+     * @return bool Status of operation
+     */
+    public function deleteNote(int $noteId): bool
+    {
+        $row = [
+            'id' => $noteId,
+        ];
+
+        $sql = "DELETE FROM notes
+                WHERE id=:id";
+
+        $q = $this->connection->prepare($sql);
+        $q->execute($row);
+
+        return (bool) $q->rowCount() ? true : false;
     }
 }
