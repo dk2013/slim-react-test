@@ -72,11 +72,22 @@
 
     td {
       background: #D8E6F3;
+
+      textarea, input {
+        width: 100%;
+      }
     }
 
-    th:first-child, td:first-child {
-      text-align: left;
-    }
+  }
+
+  .btnSubmit {
+    margin-top: 10px;
+    background: #AFCDE7;
+    color: white;
+    padding: 5px 10px;
+    border-style: solid;
+      border-width: 1px;
+      border-color: white;
   }
     
-    
+  

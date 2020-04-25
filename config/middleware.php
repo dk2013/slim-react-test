@@ -4,6 +4,7 @@ use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 use App\Middleware\CorsMiddleware;
+// use Tuupola\Middleware\CorsMiddleware;
 
 return function (App $app) {
     // Parse json, form data and xml

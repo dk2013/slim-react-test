@@ -14,12 +14,12 @@ class Notes extends React.Component {
             <div>
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Text</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
-                    </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Text</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {this.renderTableData()}

@@ -4,6 +4,7 @@ import logo from './logo.svg';
 
 import Home from './Components/Home/Home';
 import Notes from './Components/Notes/Notes';
+import NoteCreate from './Components/Notes/NoteCreate';
 
 import {
     Route,
@@ -40,6 +41,7 @@ class App extends React.Component {
                     <div className="w3-bar-block">
                         <NavLink exact={true} className="w3-bar-item w3-button" activeClassName="w3-green" to='/'>Home</NavLink>
                         <NavLink exact={true} className="w3-bar-item w3-button" activeClassName="w3-green" to='/notes'>Notes</NavLink>
+                        <NavLink exact={true} className="w3-bar-item w3-button" activeClassName="w3-green" to='/note/create'>Add note</NavLink>
                     </div>
                 </div>
                 <div id="main" style={{marginLeft: this.state.main.marginLeft}}>
@@ -51,6 +53,7 @@ class App extends React.Component {
                         <h3 className="h3">Slim and React test task</h3>
                         <div className="container">
                         <Switch>
+                            <Route path='/note/create' component={NoteCreate} />
                             <Route path='/notes' component={Notes} />
                             <Route path='/' component={Home} />
                         </Switch>
