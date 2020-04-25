@@ -5,11 +5,30 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+
+  *, ::before, ::after {
+    box-sizing: inherit;
+  }
+
+  i, cite, em, var, dfn, address {
+    font-style: normal;
+  }
+
+  b, h1, h2, h3, h4, h5, h6, strong, th {
+    font-weight: normal;
   }
   
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
+  }
+
+  @media screen and (max-width: 455px) {
+    .h3 {
+        font-size: 16px;
+    }
   }
 
   #main {
@@ -23,9 +42,41 @@
 
   #openNav {
     display: none;
+    top: -100px;
   }
 
   .h3 {
     position: fixed;
     top: 36px;
   }
+
+  .table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+
+    th, td:first-child {
+      background: #AFCDE7;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    th, td {
+      border-style: solid;
+      border-width: 0 1px 1px 0;
+      border-color: white;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    td {
+      background: #D8E6F3;
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+  }
+    
+    
