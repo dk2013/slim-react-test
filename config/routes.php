@@ -26,4 +26,8 @@ return function (App $app) {
 
     // Delete
     $app->delete('/notes/{id}', NoteDeleteAction::class);
+    // Allow preflight requests for /notes/{id}
+    $app->options('/notes/{id}', function (ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+        return $response;
+    });
 };

@@ -60,6 +60,10 @@ class NoteCreate extends React.Component {
             text: this.state.text
         })
             .then((response) => {
+                this.setState({
+                    title: '',
+                    text: ''
+                });
                 alert('The new note added');
             }, (error) => {
                 console.log(error);
